@@ -1,0 +1,18 @@
+@localhost=localhost
+@port = 80
+@host = http://{{localhost}}:{{port}}
+@contentTypeEncoded = application/x-www-form-urlencoded
+@contentType = application/json
+@client_id = 9VJZzl9Y8vJCUxgU7Czzf8KWiCa9QTVnAuSTWEF0
+
+
+
+
+
+### POST file
+curl -X 'POST' \
+  'http://0.0.0.0/api/detections/' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: multipart/form-data' \
+  -F 'file=@/home/integral/Documents/DevIntegral/ppeapi/data/mediafiles/descarga.jpg'
+

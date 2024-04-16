@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  backend:
+    container_name: backend
+    image: ppeapiprojects/backend:latest
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+    # depends_on:
+    #   - db
+    # env_file:
+    #   - .env
+    # environment:
+    #   - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db/${POSTGRES_DB}
+    volumes:
+      - ./backend:/app # Añade esta línea
+      - ./data/staticfiles:/app/data/staticfiles
+      - ./data/mediafiles:/app/data/mediafiles
+
+volumes:
+  postgres_data:
