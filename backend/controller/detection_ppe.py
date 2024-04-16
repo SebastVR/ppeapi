@@ -3,6 +3,7 @@ import shutil
 from fastapi import UploadFile
 from ultralytics import YOLO
 import json
+from datetime import datetime
 
 # Configuración del directorio donde se guardan las imágenes y la ruta del modelo YOLO
 IMAGE_DIR = Path("data/mediafiles")
@@ -52,4 +53,13 @@ def process_image(file: UploadFile) -> dict:
         if detection["name"] in detection_counts:
             detection_counts[detection["name"]] += 1
     # Devolver los resultados de la detección junto con la ruta de la imagen
-    return {"image_path": str(file_path), **detection_counts}
+    current_datetime = datetime.now().isoformat()
+    # Extraer el título de la imagen de la ruta
+    image_title = file_path.stem
+    # Devolver los resultados de la detección junto con la ruta de la imagen, la fecha y el título
+    return {
+        "image_path": str(file_path),
+        "date_uploaded": current_datetime,
+        "title": image_title,
+        "values": detection_counts,  # Modificamos la estructura de los resultados
+    }
